@@ -28,7 +28,7 @@ export default function Navbar() {
         </div>
         <div className='register'>
           <div className='notification'>
-            <IoNotificationsOutline size={22}/>
+            <IoNotificationsOutline size={22} />
           </div>
           {register?<div className='profile'>
                          <FaUserCircle size={30} />
