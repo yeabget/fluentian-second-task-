@@ -10,6 +10,7 @@ import Card from './Card';
 import Roadmap from './Roadmap';
 import Works from './Works';
 import Journey from './Journey';
+import Footer from './Footer';
 export default function Home() {
 
   return (
@@ -39,6 +40,7 @@ export default function Home() {
     <Roadmap/>
     <Works/>
     <Journey/>
+    <Footer/>
     </div>
   )
 }
