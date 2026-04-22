@@ -12,13 +12,10 @@ import Works from './Works';
 import Journey from './Journey';
 import Footer from './Footer';
 export default function Home() {
-
-  return (
+ return (
     <div>
     <div className='home'>
-     
-       <div className='home-container'>
-        
+      <div className='home-container'>
         <h1>Learn Smarter with <span>AI-Powered Roadmaps</span></h1>
         <p className='description'>Skip the generic tutorials. Get a personalized learning path generated specifically for your career goals, with real-time AI assistance.</p>
         <div className='search-bar'>
@@ -27,8 +24,8 @@ export default function Home() {
               <button>Generate Roadmap</button>
         </div>
         <div className='home-btns'>
-          <button className='course-btn'><Link>Browse Courses</Link></button>
-          <button className='dashboard-btn'><Link>Student Dashboard</Link></button>
+          <button className='course-btn'><Link to='/courses'>Browse Courses</Link></button>
+          <button className='dashboard-btn'><Link to='/dashboard'>Student Dashboard</Link></button>
         </div>
        </div>
     </div>

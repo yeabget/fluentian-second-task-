@@ -1,0 +1,64 @@
+.register-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  color: white;
+}
+
+/* ROLE SELECTION */
+.role-box {
+  text-align: center;
+}
+
+.role-container {
+  display: flex;
+  gap: 20px;
+  margin: 20px 0;
+  justify-content: center;
+}
+
+.role-card {
+  padding: 20px 30px;
+  background: #1e293b;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+  min-width: 140px;
+}
+
+.role-card:hover {
+  transform: scale(1.05);
+}
+
+.role-card.active {
+  background: #38bdf8;
+  color: black;
+  font-weight: bold;
+}
+
+/* FORM */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: #0f172a;
+  padding: 25px;
+  border-radius: 12px;
+  width: 320px;
+}
+
+.register-form input {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+}
+
+.register-form button {
+  padding: 10px;
+  background: #38bdf8;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 6px;
+}

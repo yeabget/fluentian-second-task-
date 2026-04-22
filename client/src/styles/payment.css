@@ -1,0 +1,154 @@
+.payment-wrapper {
+  min-height: 100vh;
+  background: #f5f6f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.payment-container {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+/* LEFT */
+.payment-left {
+  flex: 2;
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+}
+
+.subtitle {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: none;
+  cursor: pointer;
+}
+
+.tabs .active {
+  background: black;
+  color: white;
+}
+
+/* Card Preview */
+.card-preview {
+  background: linear-gradient(135deg, #38bdf8, #6366f1);
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.card-number {
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+/* Form */
+.form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+/* RIGHT */
+.payment-right {
+  flex: 1;
+  background: #0f172a;
+  color: white;
+  padding: 25px;
+  border-radius: 16px;
+}
+
+.course-card {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.course-card img {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* Summary */
+.summary div {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.total {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* Button */
+.pay-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 10px;
+  background: #38bdf8;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.pay-btn:hover {
+  background: #0ea5e9;
+}
+
+/* Note */
+.secure-note {
+  text-align: center;
+  font-size: 0.8rem;
+  margin-top: 10px;
+  opacity: 0.8;
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .payment-container {
+    flex-direction: column;
+  }
+
+  .payment-left,
+  .payment-right {
+    width: 100%;
+  }
+}

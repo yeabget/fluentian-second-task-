@@ -4,43 +4,87 @@ import networking from '../assets/images/networking.jfif';
 import security from '../assets/images/security.jfif';
 export const data = [
   {
+     id: 1,
     img: frontend,
     title: "Frontend Development",
     level: "Beginner",
     note: "Learn HTML, CSS, JavaScript",
-    instructor: "Abebe"
+    instructor: "Abebe",
+    duration: "12 weeks",
+    students: 2300,
+    enrolled: false,
+    modules: [
+      { title: "Introduction", time: "15m", completed: false },
+      { title: "Core Concepts", time: "25m", completed: false },
+      { title: "Advanced Topics", time: "40m", completed: false }
+    ]
+  
   },
     {
+    id: 2,
     img: frontend,
     title: "Frontend Development",
-    level: "Advanced",
-   
-    note: "React js,Next js",
-    instructor: "Abebe"
+    level: "Beginner",
+    note: "Learn HTML, CSS, JavaScript",
+    instructor: "Abebe",
+    duration: "12 weeks",
+    students: 2300,
+    enrolled: false,
+    modules: [
+      { title: "Introduction", time: "15m", completed: false },
+      { title: "Core Concepts", time: "25m", completed: false },
+      { title: "Advanced Topics", time: "40m", completed: false }
+    ]
+  
   },
    {
-    img: backend,
-    title: "Backend Development",
-    level: "Intermidate",
-    
-    note: "Node js, Mongo DB, Express js",
-    instructor: "Abebe"
-  }
-  , {
+    id: 3,
     img: networking,
-    title: "Networking Fundamentals",
+    title: "Frontend Development",
     level: "Beginner",
+    note: "Learn HTML, CSS, JavaScript",
+    instructor: "Abebe",
+    duration: "12 weeks",
+    students: 2300,
+    enrolled: false,
+    modules: [
+      { title: "Introduction", time: "15m", completed: false },
+      { title: "Core Concepts", time: "25m", completed: false },
+      { title: "Advanced Topics", time: "40m", completed: false }
+    ]
   
-    note: "Learn HTML, CSS, JavaScript, and React.",
-    instructor: "Abebe"
   }
   , {
+     id: 4,
+    img: backend,
+    title: "Frontend Development",
+    level: "Beginner",
+    note: "Learn HTML, CSS, JavaScript",
+    instructor: "Abebe",
+    duration: "12 weeks",
+    students: 2300,
+    enrolled: false,
+    modules: [
+      { title: "Introduction", time: "15m", completed: false },
+      { title: "Core Concepts", time: "25m", completed: false },
+      { title: "Advanced Topics", time: "40m", completed: false }
+    ]
+  }
+  , {
+    id: 5,
     img: security,
-    title: "Cyber Security",
-    level: "Intermediate",
-   
-    note: "Learn HTML, CSS, JavaScript, and React.",
-    instructor: "Abebe"
+    title: "Frontend Development",
+    level: "Beginner",
+    note: "Learn HTML, CSS, JavaScript",
+    instructor: "Abebe",
+    duration: "12 weeks",
+    students: 2300,
+    enrolled: false,
+    modules: [
+      { title: "Introduction", time: "15m", completed: false },
+      { title: "Core Concepts", time: "25m", completed: false },
+      { title: "Advanced Topics", time: "40m", completed: false }
+    ]
   }
 
 ];
