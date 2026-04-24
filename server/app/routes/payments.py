@@ -226,3 +226,30 @@ def get_payment_status(
         amount=payment.amount,
         transaction_id=payment.transaction_id
     )
+
+@router.get("/history")
+def get_payment_history(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """
+    Get user's payment history.
+    Frontend uses this for the Subscription/Billing page.
+    Shows all past payments with date, amount, provider, status.
+    """
+    payments = db.query(Payment).filter(
+        Payment.user_id == current_user.id
+    ).order_by(Payment.created_at.desc()).all()
+
+    return [
+        {
+            "id": p.id,
+            "course_id": p.course_id,
+            "amount": p.amount,
+            "provider": p.provider.value,
+            "status": p.status.value,
+            "transaction_id": p.transaction_id,
+            "created_at": p.created_at
+        }
+        for p in payments
+    ]
