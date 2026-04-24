@@ -1,19 +1,18 @@
-/* Wrapper */
-.courseRoadmap-wrapper {
+
+.courseRoadmap-container {
   width: 100%;
   max-width: 1000px;
-
   display: flex;
   flex-direction: column;
   gap: 30px;
   color: #000;
-  background:white;
+  background:whitesmoke;
 }
-
-/* Header Section */
 .roadmaps-header-section h1 {
+  font-family: 'Poppins', sans-serif;
   font-size: 2.2rem;
-  margin: 10px 0;
+  margin: 20px 0;
+
 }
 
 .back-btn {
@@ -25,22 +24,24 @@
   align-items: center;
   gap: 6px;
   font-size: 0.9rem;
-  margin-top: 90px;
+   font-family: 'Poppins', sans-serif;
+  margin-top: 70px;
+  margin-bottom: 30px;
 }
 
-/* Row Info */
 .row-info {
   display: flex;
   gap: 10px;
   margin-top: 10px;
 }
 
-/* Stats */
 .roadmap-stats {
   display: flex;
-  gap: 20px;
+  gap: 30px;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.85rem;
   color: #252525;
+  margin-bottom:20px  ;
 }
 
 .roadmap-stats p {
@@ -49,25 +50,24 @@
   gap: 6px;
 }
 
-/* Description */
 .roadmap-desc {
   color: #333;
-  font-size: 0.95rem;
+  font-size: 18px;
   max-width: 600px;
+  font-family: 'Poppins', sans-serif;
 }
 
-/* Buttons */
 .action-buttons {
   display: flex;
   gap: 12px;
   margin-top: 15px;
 }
-
 .enroll-btn {
-  background: #0d0d0e;
+  background: #b30606;
   color: #fff;
   border: none;
   padding: 10px 18px;
+  margin: 20px 0;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
@@ -76,7 +76,7 @@
   transform: scale(1.05);
 }
 .enrolled-status {
-  background: #e5e7eb;
+  background:whitesmoke;
   color: #555;
   border: none;
   padding: 10px 18px;

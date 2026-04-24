@@ -11,10 +11,8 @@ export default function Courses() {
 
   return (
     <>
-      <div className="page-wrapper">
+      <div className="courses">
         <div className="course-container">
-
-          {/* HEADER */}
           {!selectedCourse && (
             <div className="course-header">
               <h1>
@@ -25,8 +23,6 @@ export default function Courses() {
           )}
 
           <div className="courses-layout">
-
-            {/* MAIN CONTENT */}
             {selectedCourse ? (
               <CourseRoadmap
                 course={selectedCourse}
@@ -51,39 +47,7 @@ export default function Courses() {
               </div>
             )}
 
-            {/* AI SIDEBAR (ALWAYS VISIBLE) */}
-            {!selectedCourse && (
-              <div className="ai-sidebar">
-
-                <h2>
-                  AI <span>Insights</span>
-                </h2>
-
-                <div className="ai-card">
-                  <h4>Recommended Path</h4>
-                  <p>
-                    Based on your activity, we suggest learning <b>Backend Development</b>.
-                  </p>
-                </div>
-
-                <div className="ai-card">
-                  <h4>Skill Gap</h4>
-                  <p>
-                    You are strong in Frontend. Next step: APIs & Databases.
-                  </p>
-                </div>
-
-                <div className="ai-card">
-                  <h4>Trending</h4>
-                  <p>
-                    Cybersecurity is trending among new learners this month.
-                  </p>
-                </div>
-
-              </div>
-            )}
-
-          </div>
+           </div>
         </div>
       </div>
 

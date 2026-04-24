@@ -12,6 +12,7 @@ import CourseRoadmap from "./components/CourseRoadmap";
 import Register from "./components/Register";
 import Payment from "./components/Payment";
 import CourseProvider from "./components/CourseContext";
+import AIChat from "./components/AIChat";
 function App() {
   return (
     <BrowserRouter>
@@ -29,10 +30,9 @@ function App() {
         <Route path="/create-course" element={<CreateCourse />} />
         <Route path="/manage-courses" element={<ManageCourses />} />
          <Route path="/payment" element={<Payment />} />
-        {/* ✅ FIXED ROUTE */}
         <Route path="/register" element={<Register />} />
-
       </Routes>
+        <AIChat />
 </CourseProvider>
     </BrowserRouter>
   );

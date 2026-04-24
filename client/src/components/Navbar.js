@@ -1,125 +1,154 @@
-import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext, useEffect, useMemo } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../components/AuthContext";
 import { NotificationContext } from "../components/Notification";
+import { AiFillHome } from "react-icons/ai";
 import logo from "../assets/images/logo.png";
-import { IoNotificationsOutline } from "react-icons/io5";
+import {
+  IoNotificationsOutline
+} from "react-icons/io5";
 import { RxDashboard } from "react-icons/rx";
 import { BsChatDots } from "react-icons/bs";
-import { MdMenuBook, MdPayment } from "react-icons/md";
+import { MdMenuBook } from "react-icons/md";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
 import "../styles/navbar.css";
-export default function Navbar() {
-  const { user, logout } = useContext(AuthContext) || {};
-  const { notifications = [], markAsRead, clearAll } =
-    useContext(NotificationContext) || {};
-  const [ismenuOpen, setisMenuOpen] = useState(false);
-  const [isprofileOpen, setisProfileOpen] = useState(false);
-  const [notifOpen, setNotifOpen] = useState(false);
-  const unreadNumber = notifications.filter((n) => !n.read).length;
+export default function NextTopbar() {
+  const { user, logout } = useContext(AuthContext);
+  const notifContext = useContext(NotificationContext);
+  const notifications = notifContext?.notifications || [];
+  const markAsRead = notifContext?.markAsRead;
+  const clearAll = notifContext?.clearAll;
+  const location = useLocation();
+  const [ui, setUi] = useState({
+    menu: false,
+    profile: false,
+    notif: false,
+  });
+  useEffect(() => {
+    setUi({ menu: false, profile: false, notif: false });
+  }, [location.pathname]);
+  useEffect(() => {
+    const last = localStorage.getItem("next:lastPanel");
+    if (last) {
+      setUi((prev) => ({ ...prev, notif: last === "notif" }));
+    }
+  }, []);
+  useEffect(() => {
+    if (ui.notif) localStorage.setItem("next:lastPanel", "notif");
+  }, [ui.notif]);
+  let unread = 0;
+  notifications.forEach((n) => {
+    if (!n.read) unread++;
+  });
+  const toggle = (key) => {
+    setUi((prev) => ({
+      menu: key === "menu" ? !prev.menu : false,
+      profile: key === "profile" ? !prev.profile : false,
+      notif: key === "notif" ? !prev.notif : false,
+    }));
+  };
   return (
-    <div className="navbar-container">
+    <header className="navbar-container">
+      {/* logo */}
       <div className="logo">
-          <Link to="/">
-              <img src={logo} alt="logo" />
-          </Link>
-      </div>
-
-      <div className={ismenuOpen ? "hidden-menubar" : "links"}>
-        <Link to="/">Home</Link>
-        <Link to="/courses"><MdMenuBook />Courses</Link>
-        {user?.role !== "lecturer" && (
-        <Link to="/dashboard">
-            <RxDashboard />Dashboard
+        <Link to="/">
+          <img src={logo} alt="logo" />
         </Link>
-        )}
-        <Link to="/chat"><BsChatDots />Chat</Link>
-        <Link to="/help"><AiOutlineQuestionCircle />Help</Link>
-        {user?.role === "lecturer" && (
-          <Link to="/create-course">Create Course</Link>
-        )}
       </div>
-      <div className="register">
+      <nav className={ui.menu ? "links open" : "links"}>
+ <Link to="/">
+  <AiFillHome /> Home
+</Link>
+
+  <Link to="/courses">
+    <MdMenuBook /> Courses
+  </Link>
+
+  {user && user.role !== "lecturer" && (
+    <Link to="/dashboard">
+      <RxDashboard /> Dashboard
+    </Link>
+  )}
+  <Link to="/chat">
+    <BsChatDots /> Chat
+  </Link>
+
+  <Link to="/help">
+    <AiOutlineQuestionCircle /> Help
+  </Link>
+  {user?.role === "lecturer" && (
+    <Link to="/create-course" className="create-course-btn">Create Course</Link>
+  )}
+  {!user && ui.menu && (
+    <Link to="/register" className="mobile-register">
+      Register
+    </Link>
+  )}
+</nav>
+      <div className="right">
         <div className="notification">
-          <div
-            className="notification-icon"
-            onClick={() => setNotifOpen(!notifOpen)}
-          >
-            <IoNotificationsOutline size={28} />
-            {unreadNumber > 0 && (
-              <span className="new-notifications">{unreadNumber}</span>
-            )}
+          <div className="icon" onClick={() => toggle("notif")}>
+            <IoNotificationsOutline size={24} />
+            {unread > 0 && <span className="badge">{unread}</span>}
           </div>
-
-          {notifOpen && (
-            <div className="dropdown-notification">
-
-              <div className="notification-box">
-                <h4>Notifications</h4>
-                <button onClick={clearAll}>Clear</button>
+          {ui.notif && (
+            <div className="dropdown notif">
+              <div className="top">
+                <h4>Updates</h4>
+                {notifications.length > 0 && (
+                  <button onClick={clearAll}>Clear</button>
+                )}
               </div>
-
               {notifications.length === 0 ? (
-                <p className="no-notification">No notifications</p>
+                <p className="empty">Nothing new</p>
               ) : (
-                notifications.map((n) => (
+                notifications.slice(0, 5).map((n) => (
                   <div
                     key={n.id}
-                    className={`notification-item ${n.read ? "read" : ""}`}
-                    onClick={() => markAsRead(n.id)}
+                    className={`item ${n.read ? "read" : ""}`}
+                    onClick={() => markAsRead?.(n.id)}
                   >
                     <p>{n.message}</p>
                     <span>{n.time}</span>
                   </div>
                 ))
               )}
-
             </div>
           )}
-
         </div>
         {user ? (
-          <div className="profile-pic">
-            <div
-              className="profile"
-              onClick={() => setisProfileOpen(!isprofileOpen)}
-            >
+          <div className="profile">
+            <div onClick={() => toggle("profile")}>
               {user.image ? (
-                <img
-                  src={user.image}
-                  alt="profile"
-                  className="profile-img "
-                />
+                <img src={user.image} className="avatar" alt="profile" />
               ) : (
-                <FaUserCircle size={34} style={{color:"rgb(209, 206, 206)"}} />
+                <FaUserCircle size={26} style={{color:"white"}} />
               )}
             </div>
 
-            {isprofileOpen && (
-              <div className="profilepic-dropdown">
-                <p className="name">{user.fullName}</p>
-                <p className="user">{user.role}</p>
+            {ui.profile && (
+              <div className="dropdown profile">
+                <p>{user.fullName}</p>
+                <small>{user.role}</small>
 
                 {user.role === "lecturer" && (
-                  <Link to="/manage-courses">Manage Courses</Link>
+                  <Link to="/manage-courses">My Courses</Link>
                 )}
+
                 <button onClick={logout}>Logout</button>
               </div>
             )}
           </div>
         ) : (
           <Link to="/register">
-            <button className={ismenuOpen?"register-btn-menubar-opened":"register-btn"}>Register</button>
+            <button className="register-btn">Register</button>
           </Link>
         )}
-        <div
-          className="menubar"
-          onClick={() => setisMenuOpen(!ismenuOpen)}
-        >
-          {ismenuOpen ? <FaTimes size={25} /> : <FaBars size={25} />}
+        <div className="menu" onClick={() => toggle("menu")}>
+          {ui.menu ? <FaTimes size={24} /> : <FaBars size={24} />}
         </div>
       </div>
-    </div>
+    </header>
   );
 }

@@ -1,23 +1,18 @@
 import React, { useState, useContext } from "react";
 import "../styles/chat.css";
-
 import { FaPaperPlane, FaUserCircle, FaPaperclip } from "react-icons/fa";
-
 import { AuthContext } from "../components/AuthContext";
 import { NotificationContext } from "../components/Notification";
 
 export default function ChatPage() {
   const { user } = useContext(AuthContext);
   const { addNotification } = useContext(NotificationContext);
-
   const [messages, setMessages] = useState([
-    { id: 1, sender: "system", text: "Welcome to Course Discussion Room 🚀" },
+    { id: 1, sender: "system", text: "Welcome to Course Discussion Room " },
     { id: 2, sender: "ai", text: "Ask anything about your courses!" },
   ]);
-
   const [input, setInput] = useState("");
 
-  // 📎 FILE UPLOAD
   const handleFile = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -35,7 +30,6 @@ export default function ChatPage() {
     addNotification("📎 File sent in chat");
   };
 
-  // 💬 SEND MESSAGE
   const handleSend = () => {
     if (!input.trim()) return;
 
@@ -48,16 +42,14 @@ export default function ChatPage() {
     setMessages((prev) => [...prev, newMessage]);
     setInput("");
 
-    addNotification("💬 New chat message sent");
-
-    // fake AI response
+    addNotification(" New chat message sent");
     setTimeout(() => {
       setMessages((prev) => [
         ...prev,
         {
           id: Date.now() + 1,
           sender: "ai",
-          text: "Nice question 👍 Backend/AI integration coming soon.",
+          text: "Nice question Backend/AI integration coming soon.",
         },
       ]);
     }, 800);
@@ -65,14 +57,10 @@ export default function ChatPage() {
 
   return (
     <div className="chat-wrapper">
-
-      {/* HEADER */}
       <div className="chat-header">
-        <h2>Course <span>Discussion</span></h2>
+        <h1>Course <span>Discussion</span></h1>
         <p>Ask questions, share files, learn together</p>
       </div>
-
-      {/* CHAT BOX */}
       <div className="chat-box">
 
         {messages.map((msg) => (
@@ -90,8 +78,6 @@ export default function ChatPage() {
                 <FaUserCircle className="avatar ai" />
               )}
             </div>
-
-            {/* MESSAGE */}
             <div className="bubble">
 
               {msg.text && <p>{msg.text}</p>}
@@ -114,25 +100,17 @@ export default function ChatPage() {
         ))}
 
       </div>
-
-      {/* INPUT */}
       <div className="chat-input">
-
-        {/* FILE */}
         <label className="file-upload">
           <FaPaperclip />
           <input type="file" hidden onChange={handleFile} />
         </label>
-
-        {/* TEXT INPUT */}
         <input
           type="text"
           placeholder="Type a message..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
-
-        {/* SEND */}
         <button onClick={handleSend}>
           <FaPaperPlane />
         </button>
