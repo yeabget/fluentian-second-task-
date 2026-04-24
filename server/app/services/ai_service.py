@@ -1,69 +1,51 @@
 # AI recommendations logic
-from openai import OpenAI
-from ..config import settings
 
-client = OpenAI(api_key=settings.OPENAI_API_KEY)
-
-#     Uses OpenAI to recommend courses based on user's learning history.
 def get_course_recommendations(
     enrolled_courses: list,
     available_courses: list,
     user_progress: dict
 ) -> str:
-   
-    if not settings.OPENAI_API_KEY:
-        return None
+    """Smart course recommendations based on user's learning history."""
+    if not available_courses:
+        return "You've explored all available courses! Check back later for new content."
 
-    # Build context for OpenAI
-    enrolled_str = ", ".join(enrolled_courses) if enrolled_courses else "none yet"
-    available_str = ", ".join(available_courses) if available_courses else "none"
-    progress_str = ", ".join([f"{k}: {v}%" for k, v in user_progress.items()]) if user_progress else "no progress yet"
+    if not enrolled_courses:
+        return f"Welcome! We recommend starting with: {', '.join(available_courses[:3])}. These are great courses to kick off your learning journey!"
 
-    prompt = f"""You are a learning platform AI assistant.
-    
-A student is enrolled in: {enrolled_str}
-Their progress: {progress_str}
-Available courses they haven't enrolled in: {available_str}
+    completed_courses = [c for c, p in user_progress.items() if p == 100]
+    in_progress = [c for c, p in user_progress.items() if 0 < p < 100]
 
-Recommend 2-3 courses from the available list that would best complement their learning journey.
-Be concise and explain why each course is recommended in one sentence.
-If no courses are available, suggest what topics they should explore next."""
+    recommendation = []
 
-    response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": prompt}],
-        max_tokens=300
-    )
+    if in_progress:
+        recommendation.append(f"You're currently working on: {', '.join(in_progress)}. Focus on completing these first!")
 
-    return response.choices[0].message.content
+    if completed_courses:
+        recommendation.append(f"Great job completing: {', '.join(completed_courses)}!")
 
-#  Uses OpenAI to give personalized advice for the next lesson.
+    if available_courses:
+        recommendation.append(f"Based on your progress, we recommend exploring: {', '.join(available_courses[:3])}.")
+
+    return " ".join(recommendation) if recommendation else f"Consider enrolling in: {', '.join(available_courses[:2])}."
+
+
 def get_next_lesson_suggestion(
     course_title: str,
     completed_lessons: list,
     next_lesson: str,
     progress_percentage: float
 ) -> str:
-  
-    if not settings.OPENAI_API_KEY:
-        return None
+    """Personalized tip for the next lesson based on progress."""
+    if progress_percentage == 0:
+        return f"Welcome to '{course_title}'! Your first lesson '{next_lesson}' is ready. Take your time and enjoy the learning process!"
 
-    completed_str = ", ".join(completed_lessons) if completed_lessons else "none yet"
+    if progress_percentage < 30:
+        return f"Great start! You're {progress_percentage}% through '{course_title}'. '{next_lesson}' will build on what you've learned so far. Keep it up!"
 
-    prompt = f"""You are a helpful learning assistant.
+    if progress_percentage < 60:
+        return f"You're making solid progress at {progress_percentage}%! '{next_lesson}' is next - you're past the halfway point, keep pushing!"
 
-A student is taking "{course_title}".
-They have completed: {completed_str}
-Their progress: {progress_percentage}%
-Their next lesson is: "{next_lesson}"
+    if progress_percentage < 90:
+        return f"Almost there! At {progress_percentage}%, you're in the home stretch. '{next_lesson}' is one of the final steps - you've got this!"
 
-Give them a short motivational tip (2-3 sentences) to prepare for their next lesson.
-Be encouraging and specific to the lesson topic."""
-
-    response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": prompt}],
-        max_tokens=150
-    )
-
-    return response.choices[0].message.content
+    return f"Incredible! You're {progress_percentage}% done with '{course_title}'. Just '{next_lesson}' and a few more to go. Finish strong!"
