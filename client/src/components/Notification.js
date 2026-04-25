@@ -5,15 +5,18 @@ export const NotificationContext = createContext();
 export default function NotificationProvider({ children }) {
   const [notifications, setNotifications] = useState([]);
 
-  // load on refresh
   useEffect(() => {
-    const saved = localStorage.getItem("notifications");
-    if (saved) {
-      setNotifications(JSON.parse(saved));
+    try {
+      const saved = localStorage.getItem("notifications");
+      if (saved) {
+        setNotifications(JSON.parse(saved));
+      }
+    } catch (err) {
+      console.error("Failed to parse notifications:", err);
+      setNotifications([]);
     }
   }, []);
 
-  // save on change
   useEffect(() => {
     localStorage.setItem("notifications", JSON.stringify(notifications));
   }, [notifications]);
@@ -37,11 +40,28 @@ export default function NotificationProvider({ children }) {
     );
   };
 
-  const clearAll = () => setNotifications([]);
+  const markAllAsRead = () => {
+    setNotifications((prev) =>
+      prev.map((n) => ({ ...n, read: true }))
+    );
+  };
+
+  const clearAll = () => {
+    setNotifications([]);
+  };
+
+  const unreadCount = notifications.filter((n) => !n.read).length;
 
   return (
     <NotificationContext.Provider
-      value={{ notifications, addNotification, markAsRead, clearAll }}
+      value={{
+        notifications,
+        unreadCount,
+        addNotification,
+        markAsRead,
+        markAllAsRead,
+        clearAll,
+      }}
     >
       {children}
     </NotificationContext.Provider>

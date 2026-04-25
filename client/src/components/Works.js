@@ -27,11 +27,6 @@ export default function Works() {
           <WorkCard number="03" title="Learn & Chat" description="Watch lessons and chat with peers."/>
            <WorkCard number="04" title="Get Certified" description="Verify your skills with certificates."/>
       </div>
-
-      <div className='next-prev-btn'>
-        <button onClick={() => scroll("prev")}>  <IoArrowBack size={22} /></button>
-        <button onClick={() => scroll("next")}> <IoArrowForward size={22} /></button>
-      </div>
     </div>
   );
 }

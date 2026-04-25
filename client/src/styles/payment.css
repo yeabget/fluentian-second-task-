@@ -12,9 +12,8 @@
   gap: 30px;
   width: 100%;
   max-width: 1000px;
+  align-items: flex-start;
 }
-
-/* LEFT */
 .payment-left {
   flex: 2;
   background: white;
@@ -26,8 +25,6 @@
   color: #666;
   margin-bottom: 20px;
 }
-
-/* Tabs */
 .tabs {
   display: flex;
   gap: 10px;
@@ -47,8 +44,6 @@
   background: black;
   color: white;
 }
-
-/* Card Preview */
 .card-preview {
   background: linear-gradient(135deg, #38bdf8, #6366f1);
   color: white;
@@ -68,7 +63,6 @@
   margin-top: 15px;
 }
 
-/* Form */
 .form input {
   width: 100%;
   padding: 12px;
@@ -82,11 +76,10 @@
   gap: 10px;
 }
 
-/* RIGHT */
 .payment-right {
   flex: 1;
-  background: #0f172a;
-  color: white;
+  background: white;
+  color: #252525;
   padding: 25px;
   border-radius: 16px;
 }
@@ -104,7 +97,6 @@
   object-fit: cover;
 }
 
-/* Summary */
 .summary div {
   display: flex;
   justify-content: space-between;
@@ -115,8 +107,6 @@
   font-weight: bold;
   font-size: 1.1rem;
 }
-
-/* Button */
 .pay-btn {
   width: 100%;
   padding: 14px;
@@ -133,16 +123,30 @@
   background: #0ea5e9;
 }
 
-/* Note */
 .secure-note {
   text-align: center;
   font-size: 0.8rem;
   margin-top: 10px;
   opacity: 0.8;
 }
-
-/* MOBILE */
 @media (max-width: 900px) {
+  .payment-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .payment-left,
+  .payment-right {
+    width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .payment-wrapper {
+    padding: 15px;
+    align-items: flex-start;
+    margin-top: 70px;
+  }
+
   .payment-container {
     flex-direction: column;
   }
@@ -150,5 +154,16 @@
   .payment-left,
   .payment-right {
     width: 100%;
+    padding: 20px;
+  }
+.payment-right h3{
+ margin-bottom: 30px;
+}
+  .tabs {
+    flex-direction: column;
+  }
+
+  .row {
+    flex-direction: column;
   }
 }

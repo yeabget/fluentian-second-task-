@@ -2,12 +2,9 @@ import React, { useContext } from "react";
 import { CourseContext } from "./CourseContext";
 import { AuthContext } from "./AuthContext";
 import "../styles/subscription.css";
-
 export default function Subscription() {
   const { courses } = useContext(CourseContext);
   const { user } = useContext(AuthContext);
-
-  // mock pricing (you can replace with backend later)
   const getPrice = (course) => {
     if (course.level === "Beginner") return 10;
     if (course.level === "Intermediate") return 20;
@@ -39,13 +36,9 @@ export default function Subscription() {
                 <span>Level: {course.level}</span>
                 <span>Instructor: {course.instructor}</span>
               </div>
-
-              {/* PRICE */}
               <div className="price">
                 ${getPrice(course)}
               </div>
-
-              {/* PAYMENT STATUS */}
               {course.paid ? (
                 <button className="paid-btn">Paid ✔</button>
               ) : (

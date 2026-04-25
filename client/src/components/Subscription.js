@@ -12,7 +12,7 @@ export default function Payment() {
     name: "",
     number: "",
     expiry: "",
-    cvv: ""
+    cvv: "",
   });
 
   if (!course) return <h2>No course selected</h2>;
@@ -21,33 +21,26 @@ export default function Payment() {
 
   return (
     <div className="payment-wrapper">
-
       <div className="payment-container">
-
-        {/* LEFT SIDE */}
         <div className="payment-left">
-
           <h2>Secure Checkout</h2>
           <p className="subtitle">Complete your enrollment safely</p>
 
-          {/* Tabs */}
           <div className="tabs">
-            <button 
+            <button
               className={method === "card" ? "active" : ""}
               onClick={() => setMethod("card")}
             >
               <FaCreditCard /> Card
             </button>
 
-            <button 
+            <button
               className={method === "mobile" ? "active" : ""}
               onClick={() => setMethod("mobile")}
             >
-              📱 Mobile
+              Mobile
             </button>
           </div>
-
-          {/* Card Preview */}
           {method === "card" && (
             <div className="card-preview">
               <p className="card-number">
@@ -59,44 +52,45 @@ export default function Payment() {
               </div>
             </div>
           )}
-
-          {/* Form */}
           {method === "card" && (
             <div className="form">
-              <input 
+              <input
                 placeholder="Cardholder Name"
-                onChange={(e) => setCard({...card, name: e.target.value})}
+                onChange={(e) =>
+                  setCard({ ...card, name: e.target.value })
+                }
               />
-              <input 
+              <input
                 placeholder="Card Number"
-                onChange={(e) => setCard({...card, number: e.target.value})}
+                onChange={(e) =>
+                  setCard({ ...card, number: e.target.value })
+                }
               />
 
               <div className="row">
-                <input 
+                <input
                   placeholder="MM/YY"
-                  onChange={(e) => setCard({...card, expiry: e.target.value})}
+                  onChange={(e) =>
+                    setCard({ ...card, expiry: e.target.value })
+                  }
                 />
-                <input 
+                <input
                   placeholder="CVV"
-                  onChange={(e) => setCard({...card, cvv: e.target.value})}
+                  onChange={(e) =>
+                    setCard({ ...card, cvv: e.target.value })
+                  }
                 />
               </div>
             </div>
           )}
-
           {method === "mobile" && (
             <div className="form">
               <input placeholder="Phone Number" />
               <input placeholder="Provider (Telebirr / M-Pesa)" />
             </div>
           )}
-
         </div>
-
-        {/* RIGHT SIDE */}
         <div className="payment-right">
-
           <h3>Order Summary</h3>
 
           <div className="course-card">
@@ -112,6 +106,7 @@ export default function Payment() {
               <span>Course</span>
               <span>${price}</span>
             </div>
+
             <div>
               <span>Tax</span>
               <span>$2</span>
@@ -130,11 +125,9 @@ export default function Payment() {
           </button>
 
           <p className="secure-note">
-            🔒 Secure payment powered by gateway
+            <FaLock /> Secure payment powered by gateway
           </p>
-
         </div>
-
       </div>
     </div>
   );
