@@ -12,30 +12,37 @@ import CourseRoadmap from "./components/CourseRoadmap";
 import Register from "./components/Register";
 import Payment from "./components/Payment";
 import CourseProvider from "./components/CourseContext";
+import AuthProvider from "./components/AuthContext";
+import NotificationProvider from "./components/Notification";
 import AIChat from "./components/AIChat";
 import TestAPI from "./components/TestAPI";
+import Login from "./components/Login";
 function App() {
   return (
     <BrowserRouter>
- <CourseProvider>
-      <Navbar />
+      <AuthProvider>
+        <NotificationProvider>
+          <CourseProvider>
+            <Navbar />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/courses" element={<Courses />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/chat" element={<Chat />} />
-        <Route path="/subscription" element={<Subscription />} />
-        <Route path="/help" element={<Help />} />
-        <Route path="/courseRoadmap" element={<CourseRoadmap />} />
-        <Route path="/create-course" element={<CreateCourse />} />
-        <Route path="/manage-courses" element={<ManageCourses />} />
-         <Route path="/payment" element={<Payment />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
-        <AIChat />
-          
-</CourseProvider>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/courses" element={<Courses />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/chat" element={<Chat />} />
+              <Route path="/subscription" element={<Subscription />} />
+              <Route path="/help" element={<Help />} />
+              <Route path="/courseRoadmap" element={<CourseRoadmap />} />
+              <Route path="/create-course" element={<CreateCourse />} />
+              <Route path="/manage-courses" element={<ManageCourses />} />
+              <Route path="/payment" element={<Payment />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+            </Routes>
+            <AIChat />
+          </CourseProvider>
+        </NotificationProvider>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

@@ -6,7 +6,6 @@ export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // LOAD USER ON REFRESH
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
 

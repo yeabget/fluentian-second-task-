@@ -1,12 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API from "../api/axios";
 import "../styles/createCourse.css";
-import { CourseContext } from "./CourseContext";
 
 export default function CreateCourse() {
   const navigate = useNavigate();
-
-  const { addCourse } = useContext(CourseContext); // ✅ MUST WORK NOW
 
   const [form, setForm] = useState({
     title: "",
@@ -35,25 +33,15 @@ export default function CreateCourse() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newCourse = {
-      id: Date.now(),
-      img: form.img,
-      title: form.title,
-      level: form.level,
-      note: form.note,
-      instructor: form.instructor,
-      duration: form.duration,
-      students: 0,
-      enrolled: false,
-      modules: [],
-    };
-
-    addCourse(newCourse); // ✅ NOW WORKS
-
-    navigate("/manage-courses");
+    try {
+      await API.post("/courses", form);
+      navigate("/manage-courses");
+    } catch (err) {
+      alert("Failed to create course");
+    }
   };
 
   return (
@@ -66,9 +54,7 @@ export default function CreateCourse() {
         <input name="note" placeholder="Description" onChange={handleChange} />
         <input name="instructor" placeholder="Instructor" onChange={handleChange} />
         <input name="duration" placeholder="Duration" onChange={handleChange} />
-
         <input type="file" name="img" accept="image/*" onChange={handleChange} />
-
         <button type="submit">Create</button>
       </form>
     </div>
