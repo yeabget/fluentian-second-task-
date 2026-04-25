@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 .navbar-container {
   position: fixed;
   top: 0;
@@ -18,38 +19,45 @@
   backdrop-filter: blur(8px);
   box-shadow: 0 5px 14px rgba(0, 0, 0, 0.3);
 }
+
 .logo img {
   width: 94px;
   cursor: pointer;
 }
+
 .links {
   display: flex;
   align-items: center;
   gap: 27px;
 }
+
 .links a {
   display: flex;
   align-items: center;
   gap: 5px;
   text-decoration: none;
   color: #f3f4f6;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   padding: 6px 7px;
   font-size: 17px;
 }
+
 .links a:hover {
   background: #03035c;
   border-radius: 6px;
 }
+
 .right {
   display: flex;
   align-items: center;
   gap: 14px;
 }
+
 .notification {
   position: relative;
 }
+
 .notification .icon {
   position: relative;
   cursor: pointer;
@@ -57,10 +65,11 @@
   align-items: center;
   justify-content: center;
   padding: 4px;
-  background: transparent;
   border-radius: 50%;
-  color:white;
+  color: white;
+  background-color: transparent;
 }
+
 .badge {
   position: absolute;
   top: 6px;
@@ -75,8 +84,8 @@
   background: red;
   color: white;
   border-radius: 50%;
-  padding: 0;
 }
+
 .dropdown {
   position: absolute;
   top: 42px;
@@ -86,14 +95,16 @@
   background: #e5e7eb;
   border-radius: 10px;
   padding: 10px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
   z-index: 9999;
 }
+
 .dropdown.notif .top {
   display: flex;
   justify-content: space-between;
   margin-bottom: 8px;
 }
+
 .dropdown.notif button {
   border: none;
   background: #b30606;
@@ -102,62 +113,74 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
 .dropdown.notif .item {
   padding: 8px;
   border-bottom: 1px solid #d1d5db;
   cursor: pointer;
 }
-.dropdown.notif .item:hover {
-  transform: scale(1.01);
-}
+
 .dropdown.notif .item.read {
   opacity: 0.6;
 }
+
 .dropdown.notif span {
   font-size: 10px;
   color: #6b7280;
 }
+
 .empty {
   text-align: center;
   color: gray;
 }
+
 .profile {
   position: relative;
+  display: flex;
+  align-items: center;
 }
+
 .avatar {
   width: 33px;
   height: 33px;
   border-radius: 50%;
   object-fit: cover;
   cursor: pointer;
+  position: relative;
+  z-index: 2;
 }
-.dropdown.profile {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+ .dropdown.profile {
+    position: fixed;
+    top: 58px;
+    left: 60%;
+    transform: translateX(-50%);
+    width: 70%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 16px;
+    gap: 10px;
+    z-index: 10000;
+    border-radius: 12px;
+  }
+
+.dropdown.profile .name {
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  color: #1b1b1b;
 }
-.dropdown.profile p {
-  padding: 2px 7px;
-}
+
 .dropdown.profile .role {
-  font-size: 12px;
-  color: #38bdf8;
+  font-size: 15px;
+  font-family: "Poppins", sans-serif;
+  color: #3d51be;
 }
+
 .dropdown.profile button {
-  margin-top: 6px;
-  padding:10px 6px;
-  border: none;
-  background: #b30606;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.create-course-btn{
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-   margin-top: 6px;
+  margin-top: 6px;
   padding: 10px 6px;
   border: none;
   background: #b30606;
@@ -165,23 +188,35 @@
   border-radius: 6px;
   cursor: pointer;
 }
+
+.create-course-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 6px;
+  padding: 10px 6px;
+  background: #b30606;
+  color: white;
+  border-radius: 6px;
+}
+
 .register-btn {
-   background: #b30606;
-   color: white;
+  background: #b30606;
+  color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   font-weight: 600;
   cursor: pointer;
 }
-.register-btn:hover {
-  transform: scale(1.03);
-}
+
 .menu {
   display: none;
   color: white;
   cursor: pointer;
 }
+
 .mobile-register {
   margin-top: 10px;
   padding: 8px 12px;
@@ -190,57 +225,79 @@
   color: #f4f4fa;
   border-radius: 6px;
   font-weight: 600;
- text-align: center;
- display: flex;
- justify-content: center;
- align-items: center;
-}
-.hidden-register-btn{
-  background-color: white;
-}
-.mobile-register:hover {
-  transform: scale(1.03);
+  text-align: center;
 }
 @media (max-width: 768px) {
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .notification .icon,
+  .menu,
+  .profile > div {
+    width: 38px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+  }
+
+  .notification .icon svg,
+  .menu svg {
+    font-size: 20px;
+  }
+
+  .avatar {
+    width: 30px;
+    height: 30px;
+  }
+
+  .profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .links {
     display: none;
   }
-  .links.open {
+.links.open {
     position: absolute;
     top: 71px;
     left: 0;
     width: 100%;
-    height: 260px;
+    height: auto;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    padding: 18px;
-    gap: 12px;
-    background: rgba(9, 1, 48, 0.95);
+    padding: 14px 12px;
+    gap: 8px;
+    background: rgba(9, 1, 48, 0.97);
   }
-  .menu {
+
+  .links.open a {
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+
+  .links.open a:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .links.open a svg {
+    min-width: 18px;
+  }
+
+  .menu {
+    display: flex;
     width: 36px;
     height: 36px;
-  }
-.right {
-  display: flex;
-  align-items: center;
-  gap: 0px;
-}
-  .notification .icon {
-    width: 36px;
-    height: 36px;
-  }
-.notification{
-  padding: 0;
-  margin-right: 0;
-}
-  .avatar {
-    width: 32px;
-    height: 32px;
   }
 
   .dropdown {
@@ -248,17 +305,14 @@
     top: 70px;
     left: 10px;
     right: 10px;
-
-    width: auto;
-    max-width: unset;
-
-    border-radius: 12px;
   }
-  .register-btn{
+
+  .register-btn {
     display: none;
-    margin: 0;
   }
-  .menu{
-    margin-left: 10px;
+  .mobile-register{
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

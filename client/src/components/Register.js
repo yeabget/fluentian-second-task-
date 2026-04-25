@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import { AuthContext } from "../components/AuthContext";
 import { useNavigate } from "react-router-dom";
 import "../styles/register.css";
+import { FaGraduationCap } from "react-icons/fa";
+import { FaChalkboardTeacher } from "react-icons/fa";
 
 export default function Register() {
   const { login } = useContext(AuthContext);
@@ -16,8 +18,6 @@ export default function Register() {
     password: "",
     image: null,
   });
-
-  // IMAGE FIX (BASE64)
   const handleChange = (e) => {
     if (e.target.name === "image") {
       const file = e.target.files[0];
@@ -44,7 +44,7 @@ export default function Register() {
       fullName: form.fullName,
       email: form.email,
       image: form.image,
-      role: role, // IMPORTANT
+      role: role, 
     };
 
     login(userData);
@@ -53,12 +53,10 @@ export default function Register() {
 
   return (
     <div className="register-page">
-
-      {/* STEP 1 - ROLE SELECT */}
       {step === 1 && (
         <div className="role-box">
 
-          <h2>Select Your Role</h2>
+          <h1>Select Your <span>Role</span></h1>
 
           <div className="role-container">
 
@@ -66,14 +64,14 @@ export default function Register() {
               className={`role-card ${role === "student" ? "active" : ""}`}
               onClick={() => setRole("student")}
             >
-              🎓 Student
+             <FaGraduationCap /> Student
             </div>
 
             <div
               className={`role-card ${role === "lecturer" ? "active" : ""}`}
               onClick={() => setRole("lecturer")}
             >
-              👨‍🏫 Lecturer
+             <FaChalkboardTeacher /> Lecturer
             </div>
 
           </div>
@@ -81,14 +79,13 @@ export default function Register() {
           <button
             disabled={!role}
             onClick={() => setStep(2)}
+            className="continue-btn"
           >
             Continue
           </button>
 
         </div>
       )}
-
-      {/* STEP 2 - FORM */}
       {step === 2 && (
         <form className="register-form" onSubmit={handleSubmit}>
 

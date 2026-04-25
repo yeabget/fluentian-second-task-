@@ -8,7 +8,7 @@ export default function ManageCourses() {
   return (
     <div className="manage-container">
 
-      <h2>Manage Courses</h2>
+      <h1>Manage <span>Courses</span></h1>
 
       {courses.map((course) => (
         <div key={course.id} className="course-card">

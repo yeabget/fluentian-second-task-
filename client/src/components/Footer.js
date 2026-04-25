@@ -21,10 +21,10 @@ export default function Footer() {
      <div className='platform'>
         <ul>
             <li><h3>Platform</h3></li>
-            <li><Link href="">Course Catalog</Link></li>
-            <li><Link href="">Student Dashboard</Link></li>
-            <li><Link href="">Subscription Plans</Link></li>
-            <li><Link href="">Help Center</Link></li>
+            <li><Link to="/courses">Course Catalog</Link></li>
+            <li><Link to="/dashboard">Student Dashboard</Link></li>
+            <li><Link to="/subscription">Subscription Plans</Link></li>
+            <li><Link to="/help">Help Center</Link></li>
         </ul>
      </div>
      <div className='support'>

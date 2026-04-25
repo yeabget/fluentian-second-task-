@@ -13,6 +13,7 @@ import Register from "./components/Register";
 import Payment from "./components/Payment";
 import CourseProvider from "./components/CourseContext";
 import AIChat from "./components/AIChat";
+import TestAPI from "./components/TestAPI";
 function App() {
   return (
     <BrowserRouter>
@@ -33,6 +34,7 @@ function App() {
         <Route path="/register" element={<Register />} />
       </Routes>
         <AIChat />
+          
 </CourseProvider>
     </BrowserRouter>
   );

@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import { AuthContext } from "./AuthContext";
 import { CourseContext } from "./CourseContext";
 import "../styles/dashboard.css";
-
+import { FaUser } from "react-icons/fa";
+import Footer from '../components/Footer'
 export default function Dashboard() {
   const { user } = useContext(AuthContext);
   const { courses } = useContext(CourseContext);
@@ -10,16 +11,16 @@ export default function Dashboard() {
   const enrolledCourses = courses.filter((c) => c.enrolled);
 
   return (
+    <>
     <div className="dashboard-wrapper">
 
-      {/* LEFT PROFILE */}
       <div className="dashboard-left">
 
         <div className="profile-card">
           {user?.image ? (
             <img src={user.image} alt="profile" />
           ) : (
-            <div className="default-avatar">👤</div>
+            <div className="default-avatar"><FaUser /></div>
           )}
 
           <h2>{user?.fullName}</h2>
@@ -34,7 +35,6 @@ export default function Dashboard() {
             <b>{courses.length}</b>
           </div>
 
-          {/* STUDENT STATS */}
           {user?.role !== "lecturer" && (
             <div className="stat">
               <span>Enrolled Courses</span>
@@ -46,12 +46,8 @@ export default function Dashboard() {
 
       </div>
 
-      {/* RIGHT CONTENT */}
       <div className="dashboard-right">
-
-        <h2>Dashboard</h2>
-
-        {/* 👨‍🎓 STUDENT VIEW */}
+        <h1>Dash<span>board</span></h1>
         {user?.role !== "lecturer" && (
           <div className="progress-grid">
 
@@ -59,7 +55,6 @@ export default function Dashboard() {
               <p className="empty">You are not enrolled in any courses yet.</p>
             ) : (
               enrolledCourses.map((course) => {
-                // if backend exists → use real progress
                 const progress = course.progress || Math.floor(Math.random() * 100);
 
                 return (
@@ -86,8 +81,6 @@ export default function Dashboard() {
 
           </div>
         )}
-
-        {/* 👨‍🏫 LECTURER VIEW */}
         {user?.role === "lecturer" && (
           <div className="lecture-grid">
 
@@ -97,12 +90,12 @@ export default function Dashboard() {
                 <h3>{course.title}</h3>
 
                 <p>
-                  👥 Enrolled Students:{" "}
+                  <FaUser />Enrolled Students:{" "}
                   <b>{course.students || 0}</b>
                 </p>
 
                 <p>
-                  📊 Status:{" "}
+                   Status:{" "}
                   <span className="active">
                     {course.enrolled ? "Active" : "Inactive"}
                   </span>
@@ -117,5 +110,7 @@ export default function Dashboard() {
       </div>
 
     </div>
+    <Footer/>
+    </>
   );
 }

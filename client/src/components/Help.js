@@ -1,111 +1,112 @@
 import React, { useState } from "react";
 import "../styles/help.css";
-import { FaQuestionCircle } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
-import { MdPhone } from "react-icons/md";
-import { MdMessage } from "react-icons/md";
-import { FaChevronUp, FaChevronDown } from "react-icons/fa";
-import Footer from '../components/Footer'
+import { FaQuestionCircle, FaChevronUp, FaChevronDown } from "react-icons/fa";
+import { MdEmail, MdPhone } from "react-icons/md";
+import Footer from "../components/Footer";
+
 const faqData = [
   {
     question: "How do I change my password?",
     answer:
-      "You can change your password by going to Profile Settings > Account Security. You will need to enter your current password for verification.",
+      "Head over to your profile settings, then open Account Security. You'll be asked for your current password before setting a new one.",
   },
   {
     question: "Why is the next lesson locked?",
     answer:
-      "The next lesson is locked until you complete the previous module. This ensures structured learning progression.",
+      "We unlock lessons step by step so you don’t miss anything important. Finish the current module and the next one will open automatically.",
   },
   {
     question: "Can I access courses offline?",
     answer:
-      "Yes, you can download selected courses and access them offline through the mobile app.",
+      "Yes — some courses can be downloaded and viewed offline through our mobile app.",
   },
- {
+  {
     question: "Can I send files in the chat?",
-    answer:"Yes, our chat system supports PDFs, images, and common document formats up to 10MB per file."}
+    answer:
+      "You can send images, PDFs, and common documents up to 10MB directly in chat.",
+  },
 ];
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState(0);
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const toggle = (index) => {
+    setOpenIndex((prev) => (prev === index ? null : index));
+  };
 
   return (
     <>
-    <h1 className="help-title">How can we <span>help you?</span></h1>
-    <div className="faq-page">
+      <h1 className="help-title">
+        How can we <span>help you?</span>
+      </h1>
 
-      {/* LEFT SIDE */}
-      <div className="faq-container">
+      <div className="faq-page">
 
-        <div className="faq-header">
-          <h2><FaQuestionCircle size={24} /> Frequently Asked Questions</h2>
-          
+        <div className="faq-container">
+          <div className="faq-header">
+            <h2>
+              <FaQuestionCircle size={22} /> FAQs
+            </h2>
+          </div>
+
+          <div className="faq-list">
+            {faqData.map((item, index) => {
+              const isOpen = openIndex === index;
+
+              return (
+                <div key={index} className={`faq-item ${isOpen ? "open" : ""}`}>
+                  
+                  <div className="faq-question" onClick={() => toggle(index)}>
+                    <h4>{item.question}</h4>
+                    {isOpen ? <FaChevronUp /> : <FaChevronDown />}
+                  </div>
+
+                  {isOpen && (
+                    <p className="faq-answer">{item.answer}</p>
+                  )}
+
+                </div>
+              );
+            })}
+          </div>
         </div>
+        <div className="help-cards">
+          <h3>Still stuck?</h3>
 
-        <div className="faq-list">
-          {faqData.map((item, index) => (
-            <div key={index} className="faq-item">
-
-              <div
-                className="faq-question"
-                onClick={() =>
-                  setOpenIndex(openIndex === index ? -1 : index)
-                }
-              >
-                <h4>{item.question}</h4>
-                <div>{openIndex === index ?<FaChevronUp /> : <FaChevronDown />}</div>
+          <div className="help-card">
+            <div className="support-box">
+              <div className="icon">
+                <MdEmail size={22} />
               </div>
 
-              {openIndex === index && (
-                <p className="faq-answer">{item.answer}</p>
-              )}
+              <h4>Email us</h4>
+              <p>We usually reply within a day</p>
 
+              <a href="mailto:support@eduai.com">
+                next_support@gmail.com →
+              </a>
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
 
-      {/* RIGHT SIDE */}
-      <div className="help-cards">
-        <h3>Still Need Help?</h3>
-      <div className="help-card">
+          <div className="help-card">
+            <div className="support-box">
+              <div className="icon">
+                <MdPhone size={22} />
+              </div>
 
-       
+              <h4>Call support</h4>
+              <p>Get help instantly</p>
 
-        <div className="support-box">
-          <div className="icon"><MdEmail size={24} /></div>
-
-          <h4>Email Support</h4>
-          <p>Response in 24 hours</p>
-
-          <a href="mailto:support@eduai.com">
-            support@eduai.com →
-          </a>
+              <p className="phone-number">
+                +251 912 345 678
+              </p>
+            </div>
+          </div>
         </div>
 
       </div>
-      
- <div className="help-card">
 
-        
-
-        <div className="support-box">
-          <div className="icon"><MdPhone size={24} color="green" /></div>
-
-          <h4>Phone Support</h4>
-          <p>Immediate assistance</p>
-
-          <a href="mailto:support@eduai.com">
-            +251 912 345 678
-          </a>
-        </div>
-
-      </div>
-    
-      </div>
-    </div>
-    <Footer/>
+      <Footer />
     </>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "../styles/ai-chat.css";
+import { FaTimes } from "react-icons/fa";
 import { HiSparkles } from "react-icons/hi2";
 export default function AIChat() {
   const [open, setOpen] = useState(false);
@@ -10,8 +11,6 @@ export default function AIChat() {
   const [loading, setLoading] = useState(false);
 
   const boxRef = useRef(null);
-
-  // auto-scroll
   useEffect(() => {
     if (boxRef.current) {
       boxRef.current.scrollTop = boxRef.current.scrollHeight;
@@ -55,17 +54,14 @@ export default function AIChat() {
 
   return (
     <>
-      {/* floating button */}
       <div className="ai-btn" onClick={() => setOpen((p) => !p)}>
        <HiSparkles size={22} />
       </div>
-
-      {/* chat box */}
       {open && (
         <div className="ai-chat">
           <div className="ai-header">
             <span>AI Assistant</span>
-            <button onClick={() => setOpen(false)}>×</button>
+            <button onClick={() => setOpen(false)}><FaTimes className="faq-close-icon" /></button>
           </div>
 
           <div className="ai-messages" ref={boxRef}>
